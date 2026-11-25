@@ -6,7 +6,7 @@ Last updated: **25 November 2026**
 
 **Checkpoint 2 — Development environment and minimal application foundation**
 
-Status: complete and published on `setup/development-foundation` in [pull request #2](https://github.com/youssefalawady/resolveflow-ai/pull/2). The pull request is stacked on the still-open documentation branch so the two checkpoints remain separately reviewable; neither was merged automatically.
+Status: implementation complete and published on `setup/development-foundation` in [pull request #2](https://github.com/youssefalawady/resolveflow-ai/pull/2). The pull request is stacked on the still-open documentation branch so the two checkpoints remain separately reviewable; neither was merged automatically. Remote CI activation remains pending until the new workflow exists on a reviewed base/default branch.
 
 ## Verified starting state
 
@@ -60,6 +60,7 @@ These host observations describe this machine on the date above. The verified co
 - Backend: Ruff lint and format passed; strict mypy passed for seven source files; four pytest tests passed.
 - Frontend: ESLint and TypeScript checks passed; two Vitest tests passed; Vite production build passed.
 - npm audit reported zero known vulnerabilities for the locked frontend tree at verification time.
+- The GitHub Actions workflow mirrors these checks and includes pull-request plus `main`/`setup/**` triggers. GitHub did not create a run while the workflow exists only on this unmerged stacked branch, so its first remote run must be verified after the reviewed branch sequence is merged/retargeted.
 
 ## Decisions recorded
 
@@ -79,6 +80,7 @@ These host observations describe this machine on the date above. The verified co
 - Speech-to-text performance for Egyptian Arabic, code-switching, numbers, interruption, and latency is unmeasured.
 - LiveKit, LangGraph, ElevenLabs, Azure speech, and LLM provider integrations are unverified in this repository; current APIs, quotas, prices, and compatibility must be checked before implementation.
 - Authentication, customer identity verification, audio/transcript retention, and staff approval roles need decisions.
+- Remote CI has not run yet because the workflow is new on an unmerged stacked branch; do not report remote CI as passed until GitHub produces a successful run after review/merge.
 - Four weeks is aggressive for full voice, takeover, reliability, and a 40-case evaluation; internal feature gates and scope protection are essential.
 
 ## Checkpoint history
@@ -86,7 +88,7 @@ These host observations describe this machine on the date above. The verified co
 | Checkpoint | Result | Evidence |
 |---|---|---|
 | 1. Documentation/contracts | Complete | Six documentation files committed and pushed on the setup branch; link/whitespace/topic checks passed; pull request #1 opened and left unmerged |
-| 2. Development environment | Complete | Three healthy containers; migration at head; six automated tests plus lint/type/build and HTTP checks passed; pull request #2 opened and left unmerged |
+| 2. Development environment | Complete locally / PR open | Three healthy containers; migration at head; six automated tests plus lint/type/build and HTTP checks passed; pull request #2 opened and left unmerged; first remote CI run pending |
 | 3. Voice feasibility | Not started | Provider choice deliberately uncommitted |
 | 4–10 | Not started | See `docs/PROJECT_PLAN.md` |
 
