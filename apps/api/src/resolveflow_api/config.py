@@ -1,5 +1,6 @@
 from functools import lru_cache
 
+from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -9,6 +10,9 @@ class Settings(BaseSettings):
     database_url: str = (
         "postgresql+asyncpg://resolveflow:resolveflow-local-only@localhost:5432/resolveflow"
     )
+    azure_speech_key: SecretStr | None = None
+    azure_speech_region: str | None = None
+    elevenlabs_api_key: SecretStr | None = None
 
     model_config = SettingsConfigDict(
         env_file=".env",
