@@ -6,7 +6,7 @@ Last updated: **25 November 2026**
 
 **Checkpoint 1 — Repository documentation and shared contracts**
 
-Status: complete locally on `setup/documentation-checkpoint`. Authenticated push and pull-request creation are blocked by the invalid GitHub credential described below.
+Status: complete and published on `setup/documentation-checkpoint` in [pull request #1](https://github.com/youssefalawady/resolveflow-ai/pull/1). The pull request is open and was not merged automatically.
 
 ## Verified starting state
 
@@ -16,7 +16,7 @@ Status: complete locally on `setup/documentation-checkpoint`. Authenticated push
 - Tracked content at inspection: `.gitignore` and a 91-byte `README.md`; no application code, tests, CI, docs directory, tags, or additional branches.
 - Existing repository instructions: none before this checkpoint.
 - Workspace contained no clone initially; the public repository was cloned without modifying remote history.
-- GitHub CLI 2.95.0 is installed, but the configured `youssefalawady` credential was reported invalid. Read-only HTTPS cloning succeeded; authenticated push/PR creation is therefore expected to be blocked until reauthentication.
+- GitHub CLI 2.95.0 is installed. Its initial authentication status check reported an invalid configured token, but the repository branch push and pull-request creation subsequently succeeded with the available credential path. Recheck authentication if a later GitHub operation fails.
 
 ## Verified local runtime
 
@@ -60,14 +60,13 @@ These observations describe this machine on the date above; they are not yet pro
 - LiveKit, LangGraph, ElevenLabs, Azure speech, and LLM provider integrations are unverified in this repository; current APIs, quotas, prices, and compatibility must be checked before implementation.
 - Authentication, customer identity verification, audio/transcript retention, and staff approval roles need decisions.
 - Docker Desktop/Compose is missing locally, which blocks the intended containerized foundation until installed.
-- GitHub authentication is invalid, which blocks pushing the branch and opening a pull request until repaired.
 - Four weeks is aggressive for full voice, takeover, reliability, and a 40-case evaluation; internal feature gates and scope protection are essential.
 
 ## Checkpoint history
 
 | Checkpoint | Result | Evidence |
 |---|---|---|
-| 1. Documentation/contracts | Complete locally | Six documentation files prepared on the setup branch; link/whitespace/topic checks passed; GitHub push/PR blocked by invalid authentication |
+| 1. Documentation/contracts | Complete | Six documentation files committed and pushed on the setup branch; link/whitespace/topic checks passed; pull request #1 opened and left unmerged |
 | 2. Development environment | Not started | No application files or dependencies yet |
 | 3. Voice feasibility | Not started | Provider choice deliberately uncommitted |
 | 4–10 | Not started | See `docs/PROJECT_PLAN.md` |
@@ -79,7 +78,7 @@ After checkpoint 1 is committed (and pushed/PR-created when GitHub auth permits)
 The first human actions for checkpoint 2 are intentionally small:
 
 1. Install or open Docker Desktop and confirm `docker compose version` works in a new PowerShell terminal.
-2. Reauthenticate GitHub CLI with `gh auth login -h github.com` using the browser flow; do not paste the token into chat.
+2. Review the proposed values and open questions in `docs/POLICIES.md`; record team-approved changes in the pull request rather than treating the draft as final.
 3. Confirm the university deadline if available and tell the team whether 22 December 2026 is earlier or later than the actual due date.
 
 Once those are done, the coding agent should pin supported Python/Node versions based on current official framework requirements, add Compose services plus backend/frontend skeletons, create the initial migration, and set up local/CI checks. Do not configure paid voice or LLM credentials in checkpoint 2.
