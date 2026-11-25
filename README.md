@@ -2,7 +2,7 @@
 
 ResolveFlow AI is a university project for a bilingual (Arabic/English) voice customer-service system. Departmental agents cooperate to investigate an order complaint, reconcile evidence, propose an eligible remedy, execute authorized actions against simulated business systems, and escalate when automation is unsafe or insufficient.
 
-> **Current state:** Checkpoint 2 development foundation. PostgreSQL, FastAPI, React, migrations, tests, and CI are implemented; complaint workflows, agents, and hosted integrations have not started. See [docs/STATUS.md](docs/STATUS.md) for verified results and the next checkpoint.
+> **Current state:** Checkpoint 3 voice feasibility is in progress. The tested foundation is complete, and an isolated browser voice lab is implemented; real provider measurements and a provider decision are still pending. See [docs/STATUS.md](docs/STATUS.md) for verified results and the next human action.
 
 ## Intended experience
 
@@ -30,6 +30,7 @@ The seven logical roles are Intake, Case Coordinator, Order Investigator, Wareho
 - [Architecture](docs/ARCHITECTURE.md) — boundaries, shared contracts, workflow, persistence, reliability, and voice design.
 - [Draft policies](docs/POLICIES.md) — explicitly fictional rules for the demonstration store.
 - [Project status](docs/STATUS.md) — completed work, verified environment, decisions, risks, and the exact next action.
+- [Voice feasibility](docs/VOICE_FEASIBILITY.md) — provider research, fair-test protocol, limitations, and pending measurements.
 - [Contributor/agent guidance](AGENTS.md) — repository-wide working rules and verification expectations.
 
 ## Development principles
@@ -60,11 +61,24 @@ docker compose up --build --wait
 The command starts PostgreSQL, applies Alembic migrations, starts FastAPI, and starts the React development server. Open:
 
 - Web status page: <http://localhost:5173>
+- Checkpoint 3 voice lab: <http://localhost:5173/voice-lab>
 - API documentation: <http://localhost:8000/docs>
 - Liveness: <http://localhost:8000/health/live>
 - Readiness (includes database): <http://localhost:8000/health/ready>
 
 The checked-in local defaults work without a `.env` file. To override them, copy `.env.example` to `.env` and keep that file local. Never add real secrets to either file or commit them.
+
+### Run the Checkpoint 3 voice lab
+
+The lab works without provider credentials for recording, playback, browser speech, correction, and the two-failure handoff event. To run hosted recognition, create your own free/test resources, then put these values in the ignored local `.env` file—never in chat or a commit:
+
+```dotenv
+AZURE_SPEECH_KEY=your-local-value
+AZURE_SPEECH_REGION=your-resource-region
+ELEVENLABS_API_KEY=your-local-value
+```
+
+Restart the API after changing `.env`, open <http://localhost:5173/voice-lab>, tick the consent box, and allow microphone access only when the browser asks. The API exchanges the long-lived values for short-lived browser tokens. Record only the provided synthetic sentences; exported JSON contains measurements and no raw audio.
 
 ### Run checks
 
@@ -109,4 +123,4 @@ docs/                     Plan, architecture, draft policies, and durable status
 
 ## Project status
 
-The working target is four weeks from 25 November to 22 December 2026, pending confirmation of the university deadline. Checkpoints 1 and 2 are complete on setup branches. Progress, verification evidence, and blockers are maintained in [docs/STATUS.md](docs/STATUS.md).
+The working target is four weeks from 25 November to 22 December 2026, pending confirmation of the university deadline. Checkpoints 1 and 2 are complete on setup branches, and Checkpoint 3 is in progress. Progress, verification evidence, and blockers are maintained in [docs/STATUS.md](docs/STATUS.md).

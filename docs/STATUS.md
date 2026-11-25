@@ -4,9 +4,9 @@ Last updated: **25 November 2026**
 
 ## Current checkpoint
 
-**Checkpoint 2 — Development environment and minimal application foundation**
+**Checkpoint 3 — Early voice feasibility experiment**
 
-Status: implementation complete and published on `setup/development-foundation` in [pull request #2](https://github.com/youssefalawady/resolveflow-ai/pull/2). The pull request is stacked on the still-open documentation branch so the two checkpoints remain separately reviewable; neither was merged automatically. Remote CI activation remains pending until the new workflow exists on a reviewed base/default branch.
+Status: in progress on `setup/voice-feasibility`. The isolated browser experiment, secure local token exchange, fixed synthetic test set, measurement functions, two-way browser reply controls, correction record, and two-failure structured handoff are implemented and tested. Real Azure/ElevenLabs credentials, human-spoken measurements, and the resulting provider decision remain intentionally pending, so this checkpoint is not complete.
 
 ## Verified starting state
 
@@ -62,6 +62,24 @@ These host observations describe this machine on the date above. The verified co
 - npm audit reported zero known vulnerabilities for the locked frontend tree at verification time.
 - The GitHub Actions workflow mirrors these checks and includes pull-request plus `main`/`setup/**` triggers. GitHub did not create a run while the workflow exists only on this unmerged stacked branch, so its first remote run must be verified after the reviewed branch sequence is merged/retargeted.
 
+## Checkpoint 3 work so far
+
+- `apps/web/src/voice-lab`: consent-gated in-memory capture, 16 kHz PCM conversion, fixed Arabic/English/mixed test cases, same-clip provider replay, latency/WER/critical-field metrics, correction capture, browser reply/interruption controls, JSON export, and handoff event.
+- `apps/api/.../voice_lab.py`: provider configuration status and short-lived token endpoints; long-lived keys are never returned to the browser.
+- `docs/VOICE_FEASIBILITY.md`: official source review, provider limitations, fair protocol, test set, empty truthful results table, and decision gate.
+- LiveKit is deferred to full voice integration so transport behavior does not confound this recognition comparison.
+- No hosted key, personal recording, or invented measurement is present in the repository.
+
+## Checkpoint 3 verification so far
+
+- Backend Ruff lint/format: passed.
+- Backend strict mypy: passed for ten source files.
+- Backend tests: nine passed, including route registration, secret non-disclosure, missing-configuration behavior, short-token responses, health, and readiness behavior.
+- Frontend ESLint and TypeScript: passed.
+- Frontend tests: seven passed across three files, including normalization/metrics, consent/configuration UI, handoff generation, and foundation behavior.
+- Frontend production build: passed. The Azure SDK is dynamically loaded only for its provider run.
+- Real microphone/provider behavior: pending human trial; automated checks are not represented as hosted-provider evidence.
+
 ## Decisions recorded
 
 - Build and test the durable complaint engine through text before full voice integration.
@@ -89,17 +107,18 @@ These host observations describe this machine on the date above. The verified co
 |---|---|---|
 | 1. Documentation/contracts | Complete | Six documentation files committed and pushed on the setup branch; link/whitespace/topic checks passed; pull request #1 opened and left unmerged |
 | 2. Development environment | Complete locally / PR open | Three healthy containers; migration at head; six automated tests plus lint/type/build and HTTP checks passed; pull request #2 opened and left unmerged; first remote CI run pending |
-| 3. Voice feasibility | Not started | Provider choice deliberately uncommitted |
+| 3. Voice feasibility | In progress | Lab and automated checks complete locally; real same-clip trials and provider decision pending |
 | 4–10 | Not started | See `docs/PROJECT_PLAN.md` |
 
 ## Exact next checkpoint
 
-After Checkpoint 2 is committed and published, proceed only to **Checkpoint 3: early voice feasibility experiment**.
+Finish only **Checkpoint 3: early voice feasibility experiment**; do not start complaint logic yet.
 
 The next human actions are intentionally small:
 
-1. Open <http://localhost:5173> and confirm it says **Ready for development** with FastAPI, PostgreSQL, and React online.
-2. Review [pull request #2](https://github.com/youssefalawady/resolveflow-ai/pull/2); it is stacked on pull request #1, so review/merge #1 first and keep the draft-policy caveat.
-3. Confirm the university deadline if available so the provisional 22 December 2026 target can be corrected.
+1. Create free/test Azure Speech and ElevenLabs resources if the team approves their terms; do not purchase a tier yet.
+2. Put the three values named in `.env.example` into the ignored local `.env` file yourself; never paste them into chat or commit them.
+3. Restart the API, open <http://localhost:5173/voice-lab>, allow microphone access, and run the seven synthetic prompts against both providers using the protocol in `docs/VOICE_FEASIBILITY.md`.
+4. Share only the exported measurement JSON files, not raw audio or credentials, so results and the provider decision can be documented.
 
-Checkpoint 3 should remain a disposable, measured browser-voice feasibility experiment. Verify current provider documentation and limits before requesting credentials; do not couple the experiment to complaint logic or purchase a service without explicit approval.
+Checkpoint 3 remains deliberately unfinished until those measurements exist. Do not couple this lab to complaint logic, start Checkpoint 4, or report a provider winner before the data is collected.

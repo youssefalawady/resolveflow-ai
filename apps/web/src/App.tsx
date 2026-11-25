@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import { VoiceLab } from './voice-lab/VoiceLab'
+
 type ServiceState = 'checking' | 'online' | 'offline'
 
 type HealthResponse = {
@@ -42,7 +44,7 @@ function StatusBadge({ state }: { state: ServiceState }) {
   )
 }
 
-export default function App() {
+function Foundation() {
   const [environment, setEnvironment] = useState<EnvironmentState>(initialState)
 
   useEffect(() => {
@@ -111,7 +113,14 @@ export default function App() {
         <p className="checkpoint-note">
           Checkpoint 2 · Foundation only · No customer data or hosted AI services
         </p>
+        <a className="primary-link" href="/voice-lab">
+          Open Checkpoint 3 voice lab
+        </a>
       </section>
     </main>
   )
+}
+
+export default function App() {
+  return window.location.pathname === '/voice-lab' ? <VoiceLab /> : <Foundation />
 }

@@ -24,6 +24,25 @@ select {
   font: inherit;
 }
 
+button,
+.primary-link {
+  border: 1px solid #34415c;
+  border-radius: 0.75rem;
+  color: #f6f7fb;
+  background: #16223b;
+  cursor: pointer;
+  font-weight: 750;
+}
+
+button {
+  padding: 0.75rem 1rem;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
 .page-shell {
   min-height: 100vh;
   padding: clamp(2rem, 7vw, 6rem) clamp(1.25rem, 6vw, 6rem);
@@ -169,6 +188,222 @@ h1 {
   font-size: 0.76rem;
 }
 
+.primary-link {
+  width: fit-content;
+  margin-top: 1.25rem;
+  padding: 0.85rem 1rem;
+  display: inline-flex;
+  text-decoration: none;
+}
+
+.voice-shell {
+  min-height: 100vh;
+  padding: clamp(1.5rem, 5vw, 4rem);
+  background:
+    radial-gradient(circle at 78% 10%, rgb(80 103 255 / 16%), transparent 36rem),
+    #080d19;
+}
+
+.voice-lab {
+  width: min(100%, 1180px);
+  margin: 0 auto;
+}
+
+.voice-lab h1 {
+  font-size: clamp(2.8rem, 7vw, 5.6rem);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #9ab8f5;
+  text-decoration: none;
+}
+
+.privacy-banner,
+.error-message {
+  margin: 1.5rem 0;
+  padding: 1rem 1.2rem;
+  border: 1px solid rgb(34 211 157 / 38%);
+  border-radius: 0.9rem;
+  color: #c5f5e6;
+  background: rgb(11 43 40 / 54%);
+}
+
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.lab-card {
+  padding: 1.4rem;
+  border: 1px solid #283248;
+  border-radius: 1rem;
+  background: rgb(13 21 38 / 88%);
+}
+
+.lab-card:last-child {
+  grid-column: 1 / -1;
+}
+
+.lab-card h2 {
+  margin: 0.5rem 0 1.25rem;
+}
+
+.step-number {
+  color: #65738d;
+  font: 0.8rem ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.field-label,
+.consent-row {
+  display: block;
+  color: #b9c4d8;
+  font-size: 0.9rem;
+}
+
+select,
+.inline-field input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #34415c;
+  border-radius: 0.7rem;
+  color: #f6f7fb;
+  background: #0d1628;
+}
+
+blockquote {
+  min-height: 4.5rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-inline-start: 3px solid #7fa9ff;
+  border-radius: 0.4rem;
+  color: #f4f7ff;
+  background: #101a2f;
+  font-size: 1.12rem;
+  line-height: 1.7;
+}
+
+.muted,
+.empty-state,
+.lab-footer span {
+  color: #8e9ab0;
+}
+
+.consent-row {
+  margin: 1.25rem 0;
+  line-height: 1.5;
+}
+
+.consent-row input {
+  margin-inline-end: 0.55rem;
+}
+
+.primary-button {
+  border-color: #4f7ee8;
+  background: #315fc3;
+}
+
+.danger-button {
+  border-color: #8e4054;
+  background: #4a2330;
+}
+
+.audio-review {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #aeb8cc;
+}
+
+.audio-review audio {
+  width: min(100%, 360px);
+}
+
+.provider-actions,
+.two-way,
+.inline-field,
+.lab-footer {
+  display: flex;
+  gap: 0.7rem;
+}
+
+.provider-actions button {
+  flex: 1;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.provider-actions small {
+  color: #9eabc2;
+  font-weight: 500;
+}
+
+.result-card {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #303d58;
+  border-radius: 0.8rem;
+  background: #0b1426;
+}
+
+.result-card h3 {
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.result-card dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.result-card dl div {
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+  background: #111d33;
+}
+
+.result-card dt {
+  color: #8490a7;
+  font-size: 0.72rem;
+}
+
+.result-card dd {
+  margin: 0.25rem 0 0;
+  font-weight: 800;
+}
+
+.inline-field {
+  margin-bottom: 1rem;
+}
+
+.two-way {
+  margin-bottom: 1rem;
+}
+
+.event-output {
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid rgb(246 200 94 / 36%);
+  border-radius: 0.8rem;
+  color: #f6d88f;
+  background: #211d13;
+}
+
+.error-message {
+  border-color: rgb(255 113 137 / 44%);
+  color: #ffc1cc;
+  background: rgb(74 26 41 / 74%);
+}
+
+.lab-footer {
+  margin-top: 1rem;
+  align-items: center;
+}
+
 @media (max-width: 760px) {
   .service-grid {
     grid-template-columns: 1fr;
@@ -185,5 +420,24 @@ h1 {
 
   .summary-card strong {
     text-align: left;
+  }
+
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-card:last-child {
+    grid-column: auto;
+  }
+
+  .result-card dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .provider-actions,
+  .inline-field,
+  .lab-footer {
+    align-items: stretch;
+    flex-direction: column;
   }
 }

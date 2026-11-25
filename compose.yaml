@@ -25,6 +25,9 @@ services:
     environment:
       APP_ENV: ${APP_ENV:-development}
       DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://resolveflow:resolveflow-local-only@db:5432/resolveflow}
+      AZURE_SPEECH_KEY: ${AZURE_SPEECH_KEY:-}
+      AZURE_SPEECH_REGION: ${AZURE_SPEECH_REGION:-}
+      ELEVENLABS_API_KEY: ${ELEVENLABS_API_KEY:-}
     command:
       - /bin/sh
       - -c
