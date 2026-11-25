@@ -6,7 +6,7 @@ Last updated: **25 November 2026**
 
 **Checkpoint 2 — Development environment and minimal application foundation**
 
-Status: complete locally on `setup/development-foundation`; commit, push, and pull-request publication are pending the final repository checks. This branch is based on the still-open documentation branch so the two checkpoints remain separately reviewable.
+Status: complete and published on `setup/development-foundation` in [pull request #2](https://github.com/youssefalawady/resolveflow-ai/pull/2). The pull request is stacked on the still-open documentation branch so the two checkpoints remain separately reviewable; neither was merged automatically.
 
 ## Verified starting state
 
@@ -86,7 +86,7 @@ These host observations describe this machine on the date above. The verified co
 | Checkpoint | Result | Evidence |
 |---|---|---|
 | 1. Documentation/contracts | Complete | Six documentation files committed and pushed on the setup branch; link/whitespace/topic checks passed; pull request #1 opened and left unmerged |
-| 2. Development environment | Complete locally | Three healthy containers; migration at head; six automated tests plus lint/type/build and HTTP checks passed; publication pending |
+| 2. Development environment | Complete | Three healthy containers; migration at head; six automated tests plus lint/type/build and HTTP checks passed; pull request #2 opened and left unmerged |
 | 3. Voice feasibility | Not started | Provider choice deliberately uncommitted |
 | 4–10 | Not started | See `docs/PROJECT_PLAN.md` |
 
@@ -97,7 +97,7 @@ After Checkpoint 2 is committed and published, proceed only to **Checkpoint 3: e
 The next human actions are intentionally small:
 
 1. Open <http://localhost:5173> and confirm it says **Ready for development** with FastAPI, PostgreSQL, and React online.
-2. Review the Checkpoint 2 pull request after it is published; do not merge the documentation pull request automatically without reviewing the draft policies.
+2. Review [pull request #2](https://github.com/youssefalawady/resolveflow-ai/pull/2); it is stacked on pull request #1, so review/merge #1 first and keep the draft-policy caveat.
 3. Confirm the university deadline if available so the provisional 22 December 2026 target can be corrected.
 
 Checkpoint 3 should remain a disposable, measured browser-voice feasibility experiment. Verify current provider documentation and limits before requesting credentials; do not couple the experiment to complaint logic or purchase a service without explicit approval.
