@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "resolveflow-api"
+version = "0.1.0"
+description = "ResolveFlow AI backend foundation"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "alembic==1.20.1",
+  "asyncpg==0.32.0",
+  "fastapi==0.165.0",
+  "pydantic-settings==2.16.3",
+  "sqlalchemy[asyncio]==2.1.9",
+  "uvicorn[standard]==0.54.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "httpx2==2.16.2",
+  "mypy==2.4.1",
+  "pytest==9.2.0",
+  "pytest-asyncio==1.5.0",
+  "ruff==0.17.6",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+packages = ["resolveflow_api"]

@@ -2,7 +2,7 @@
 
 ## Status
 
-This is the **proposed architecture for the documentation checkpoint**, not a description of implemented software. The repository currently contains no application code or integrations. Technology/provider details must be validated in the environment and against current official documentation during the relevant checkpoint.
+The Checkpoint 2 foundation is implemented: Docker Compose runs PostgreSQL 17, a Python 3.12/FastAPI service, and a Node 24/React service; Alembic owns schema migrations, both applications have automated quality checks, and GitHub Actions mirrors them. The complaint domain, agent workflow, voice layer, provider adapters, and staff/customer features below remain proposed until their checkpoints. Technology/provider details must still be validated against current official documentation before each integration.
 
 ## Design goals
 
