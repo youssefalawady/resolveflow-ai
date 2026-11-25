@@ -4,9 +4,9 @@ Last updated: **25 November 2026**
 
 ## Current checkpoint
 
-**Checkpoint 1 — Repository documentation and shared contracts**
+**Checkpoint 2 — Development environment and minimal application foundation**
 
-Status: complete and published on `setup/documentation-checkpoint` in [pull request #1](https://github.com/youssefalawady/resolveflow-ai/pull/1). The pull request is open and was not merged automatically.
+Status: complete locally on `setup/development-foundation`; commit, push, and pull-request publication are pending the final repository checks. This branch is based on the still-open documentation branch so the two checkpoints remain separately reviewable.
 
 ## Verified starting state
 
@@ -28,9 +28,10 @@ Status: complete and published on `setup/documentation-checkpoint` in [pull requ
 | Python launcher (`py`) | installed but reports no registered Python |
 | Node.js | v24.13.0 |
 | npm | 11.6.2 |
-| Docker / Docker Compose | not installed or not on `PATH` |
+| Docker Desktop | 4.100.1, installed and running |
+| Docker Engine / Compose | 29.9.3 / v5.7.1 |
 
-These observations describe this machine on the date above; they are not yet project version requirements. The foundation should pin supported Python and Node versions after checking current framework requirements. Containerized development should minimize host drift.
+These host observations describe this machine on the date above. The verified containers currently run Python 3.12.16, Node 24.22.3 (LTS), npm 11.19.1, and PostgreSQL 17.12. Project dependencies are pinned in `pyproject.toml` and `package-lock.json`; base image patch versions remain supplied by the selected supported image lines.
 
 ## Checkpoint 1 deliverables
 
@@ -40,6 +41,25 @@ These observations describe this machine on the date above; they are not yet pro
 - `docs/ARCHITECTURE.md`: proposed components, boundaries, workflow states, conceptual contracts, persistence, reliability, voice/handoff, security, and open decisions.
 - `docs/POLICIES.md`: prominently labeled draft/fictional policies and unresolved approval questions.
 - `docs/STATUS.md`: this durable handoff record.
+
+## Checkpoint 2 deliverables
+
+- `compose.yaml`: health-gated PostgreSQL, API, and web services with persistent development volumes.
+- `apps/api`: Python 3.12/FastAPI service, typed settings, async PostgreSQL readiness, Alembic, initial `service_metadata` migration, and four health tests.
+- `apps/web`: Node 24/React/Vite status page, API proxy, responsive styling, and two component tests.
+- `.env.example`: development placeholders only; `.env` remains ignored.
+- `.github/workflows/ci.yml`: backend lint/format/type/migration/tests and frontend lint/type/tests/build on pull requests and `main` pushes.
+- `README.md`: exact start, check, stop, reset, URL, and repository-layout instructions.
+
+## Checkpoint 2 verification
+
+- `docker compose config --quiet`: passed.
+- Clean image builds: passed for API and web.
+- Fresh PostgreSQL volume initialized and Alembic upgraded to `20261125_0001 (head)`.
+- All three services reported healthy; live API and web HTTP requests returned 200.
+- Backend: Ruff lint and format passed; strict mypy passed for seven source files; four pytest tests passed.
+- Frontend: ESLint and TypeScript checks passed; two Vitest tests passed; Vite production build passed.
+- npm audit reported zero known vulnerabilities for the locked frontend tree at verification time.
 
 ## Decisions recorded
 
@@ -59,7 +79,6 @@ These observations describe this machine on the date above; they are not yet pro
 - Speech-to-text performance for Egyptian Arabic, code-switching, numbers, interruption, and latency is unmeasured.
 - LiveKit, LangGraph, ElevenLabs, Azure speech, and LLM provider integrations are unverified in this repository; current APIs, quotas, prices, and compatibility must be checked before implementation.
 - Authentication, customer identity verification, audio/transcript retention, and staff approval roles need decisions.
-- Docker Desktop/Compose is missing locally, which blocks the intended containerized foundation until installed.
 - Four weeks is aggressive for full voice, takeover, reliability, and a 40-case evaluation; internal feature gates and scope protection are essential.
 
 ## Checkpoint history
@@ -67,18 +86,18 @@ These observations describe this machine on the date above; they are not yet pro
 | Checkpoint | Result | Evidence |
 |---|---|---|
 | 1. Documentation/contracts | Complete | Six documentation files committed and pushed on the setup branch; link/whitespace/topic checks passed; pull request #1 opened and left unmerged |
-| 2. Development environment | Not started | No application files or dependencies yet |
+| 2. Development environment | Complete locally | Three healthy containers; migration at head; six automated tests plus lint/type/build and HTTP checks passed; publication pending |
 | 3. Voice feasibility | Not started | Provider choice deliberately uncommitted |
 | 4–10 | Not started | See `docs/PROJECT_PLAN.md` |
 
 ## Exact next checkpoint
 
-After checkpoint 1 is committed (and pushed/PR-created when GitHub auth permits), proceed only to **Checkpoint 2: development environment and minimal application foundation**.
+After Checkpoint 2 is committed and published, proceed only to **Checkpoint 3: early voice feasibility experiment**.
 
-The first human actions for checkpoint 2 are intentionally small:
+The next human actions are intentionally small:
 
-1. Install or open Docker Desktop and confirm `docker compose version` works in a new PowerShell terminal.
-2. Review the proposed values and open questions in `docs/POLICIES.md`; record team-approved changes in the pull request rather than treating the draft as final.
-3. Confirm the university deadline if available and tell the team whether 22 December 2026 is earlier or later than the actual due date.
+1. Open <http://localhost:5173> and confirm it says **Ready for development** with FastAPI, PostgreSQL, and React online.
+2. Review the Checkpoint 2 pull request after it is published; do not merge the documentation pull request automatically without reviewing the draft policies.
+3. Confirm the university deadline if available so the provisional 22 December 2026 target can be corrected.
 
-Once those are done, the coding agent should pin supported Python/Node versions based on current official framework requirements, add Compose services plus backend/frontend skeletons, create the initial migration, and set up local/CI checks. Do not configure paid voice or LLM credentials in checkpoint 2.
+Checkpoint 3 should remain a disposable, measured browser-voice feasibility experiment. Verify current provider documentation and limits before requesting credentials; do not couple the experiment to complaint logic or purchase a service without explicit approval.

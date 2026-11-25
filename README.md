@@ -2,7 +2,7 @@
 
 ResolveFlow AI is a university project for a bilingual (Arabic/English) voice customer-service system. Departmental agents cooperate to investigate an order complaint, reconcile evidence, propose an eligible remedy, execute authorized actions against simulated business systems, and escalate when automation is unsafe or insufficient.
 
-> **Current state:** documentation foundation only. No application code or external service integration exists yet. See [docs/STATUS.md](docs/STATUS.md) for the verified repository state and next checkpoint.
+> **Current state:** Checkpoint 2 development foundation. PostgreSQL, FastAPI, React, migrations, tests, and CI are implemented; complaint workflows, agents, and hosted integrations have not started. See [docs/STATUS.md](docs/STATUS.md) for verified results and the next checkpoint.
 
 ## Intended experience
 
@@ -43,10 +43,70 @@ The seven logical roles are Intake, Case Coordinator, Order Investigator, Wareho
 
 ## Local setup
 
-Local application setup intentionally starts in the next checkpoint. At this checkpoint there are no dependencies to install and no services to run. The planned setup will require Docker Desktop (with Compose), Git, and a code editor; host Python and Node will be optional when development runs inside containers.
+### Prerequisites
 
-Do not add real secrets to the repository. Future configuration will use a committed `.env.example` plus an ignored local `.env`.
+- Git.
+- Docker Desktop with Compose. The verified development environment uses Docker Desktop 4.100.1 and Compose v5.7.1.
+- A code editor. Host Python and Node are optional because checks run inside containers.
+
+### Start the application
+
+From the repository root:
+
+```powershell
+docker compose up --build --wait
+```
+
+The command starts PostgreSQL, applies Alembic migrations, starts FastAPI, and starts the React development server. Open:
+
+- Web status page: <http://localhost:5173>
+- API documentation: <http://localhost:8000/docs>
+- Liveness: <http://localhost:8000/health/live>
+- Readiness (includes database): <http://localhost:8000/health/ready>
+
+The checked-in local defaults work without a `.env` file. To override them, copy `.env.example` to `.env` and keep that file local. Never add real secrets to either file or commit them.
+
+### Run checks
+
+```powershell
+docker compose exec api ruff check .
+docker compose exec api ruff format --check .
+docker compose exec api mypy src
+docker compose exec api pytest
+docker compose exec api alembic current
+
+docker compose exec web npm run lint
+docker compose exec web npm run typecheck
+docker compose exec web npm test
+docker compose exec web npm run build
+```
+
+### Stop or reset
+
+Stop the services while preserving local database data:
+
+```powershell
+docker compose down
+```
+
+Development-only reset (permanently removes the local PostgreSQL and dependency volumes):
+
+```powershell
+docker compose down --volumes
+```
+
+Run the reset command only when you intentionally want a clean local database.
+
+## Repository layout
+
+```text
+apps/api/                 FastAPI application, Alembic migrations, backend tests
+apps/web/                 React/Vite application and frontend tests
+.github/workflows/ci.yml  Pull-request quality checks
+compose.yaml              Local PostgreSQL, API, and web services
+docs/                     Plan, architecture, draft policies, and durable status
+```
 
 ## Project status
 
-The working target is four weeks from 25 November to 22 December 2026, pending confirmation of the university deadline. The scope is staged so a demonstrable text-based system exists before higher-risk voice and dashboard work. Progress and blockers are maintained in [docs/STATUS.md](docs/STATUS.md).
+The working target is four weeks from 25 November to 22 December 2026, pending confirmation of the university deadline. Checkpoints 1 and 2 are complete on setup branches. Progress, verification evidence, and blockers are maintained in [docs/STATUS.md](docs/STATUS.md).
